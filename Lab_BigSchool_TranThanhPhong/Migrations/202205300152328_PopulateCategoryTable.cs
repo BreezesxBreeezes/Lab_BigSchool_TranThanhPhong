@@ -9,7 +9,7 @@ namespace Lab_BigSchool_TranThanhPhong.Migrations
         {
             Sql("INSERT INTO CATEGORIES (ID,NAME) VALUES (1, 'Development')");
             Sql("INSERT INTO CATEGORIES (ID,NAME) VALUES (2, 'Business')");
-            Sql("INSERT INTO CATEGORIES (ID,NAME) VALUES (3, 'Margeting')");
+            Sql("INSERT INTO CATEGORIES (ID,NAME) VALUES (3, 'Marketing')");
         }
         
         public override void Down()

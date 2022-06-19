@@ -10,29 +10,27 @@ using System.Web.Http;
 
 namespace Lab_BigSchool_TranThanhPhong.Controllers
 {
-    [Authorize]
-    public class AttendancesController : ApiController
+    public class FollowingsController : ApiController
     {
-        private ApplicationDbContext _dbContext;
-        public AttendancesController()
+        private readonly ApplicationDbContext _dbContext;
+        public FollowingsController()
         {
             _dbContext = new ApplicationDbContext();
         }
-
         [HttpPost]
-        public IHttpActionResult Attend(AttendanceDto attendanceDto)
+        public IHttpActionResult Follow(FollowingDto followingDto)
         {
             var userId = User.Identity.GetUserId();
-            if (_dbContext.Attendances.Any(a => a.AttendeeId == userId && a.CourseId == attendanceDto.CourseId))
+            if (_dbContext.Followings.Any(f => f.FollowerId == userId && f.FolloweeId == followingDto.FolloweeId))
             {
-                return BadRequest("The Attendance already exits!");
+                return BadRequest("Following already exits!");
             }
-            var attendance = new Attendance
+            var folowing = new Following
             {
-                CourseId = attendanceDto.CourseId,
-                AttendeeId = userId
+                FollowerId = userId,
+                FolloweeId = followingDto.FolloweeId
             };
-            _dbContext.Attendances.Add(attendance);
+            _dbContext.Followings.Add(folowing);
             _dbContext.SaveChanges();
             return Ok();
 
